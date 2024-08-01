@@ -1,6 +1,8 @@
 <?php
 
-require_once('RegisterAttendance.php');
+require_once('PartTimer.php');
+require_once('PartSalary.php');
+require_once('CalcSalary.php');
 
 $register_info = [];
 
@@ -10,18 +12,16 @@ $date = new DateTime('now', $timezone);
 $formatted_date = $date->format('Y-m-d');
 $register_info['date'] = $formatted_date;
 
-// PartRankについて入力
-echo 'PartRankを1から7の整数で入力してください' . PHP_EOL;
-echo 'PartRank: ';
-$register_info['part_rank'] = (int)trim(fgets(STDIN));
-
 // shiftTypeについての入力
 echo "shiftTypeを['morning', 'afternoon', 'night']から入力してください";
 echo 'shiftType: ';
 $register_info['shift_type'] = trim(fgets(STDIN));
 
-$rank = new PartRank($register_info['part_rank']);
-$register = new RegisterAttendance($register_info['date'], $register_info['shift_type']);
+$partTimer = new PartTimer(1, 'John', 'john.doe@example.com', 3);
+$partSalary = new PartSalary();
+$calcSalary = new CalcSalary($register_info['shift_type']);
 
-$result = $register->registerSalary($rank);
+$calcResult = $calcSalary->calcSalary($partTimer, $partSalary);
+$result = [$register_info['date'], $calcResult];
+
 var_export($result);
