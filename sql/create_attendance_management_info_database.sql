@@ -1,0 +1,1 @@
+CREATE DATABASE attendance_management_info;
