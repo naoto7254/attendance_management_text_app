@@ -7,6 +7,7 @@ CREATE TABLE salary_records (
     part_timer_email VARCHAR(100),
     part_timer_level INTEGER,
     shift_type VARCHAR(20),
+    date_worked DATE,
     generated_salary INTEGER,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) DEFAULT CHARACTER SET=utf8mb4;
