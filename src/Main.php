@@ -2,7 +2,7 @@
 
 require_once('PartTimer.php');
 require_once('PartSalary.php');
-require_once('CalcSalary.php');
+require_once('Calculator.php');
 
 $register_info = [];
 
@@ -19,7 +19,7 @@ $register_info['shift_type'] = trim(fgets(STDIN));
 
 $partTimer = new PartTimer(1, 'John', 'john.doe@example.com', 3);
 
-$calcResult = CalcSalary::calcSalary($partTimer, $register_info['shift_type']);
+$calcResult = Calculator::calcSalary($partTimer, $register_info['shift_type']);
 $result = [$register_info['date'], $calcResult];
 
 var_export($result);
