@@ -18,10 +18,8 @@ echo 'shiftType: ';
 $register_info['shift_type'] = trim(fgets(STDIN));
 
 $partTimer = new PartTimer(1, 'John', 'john.doe@example.com', 3);
-$partSalary = new PartSalary();
-$calcSalary = new CalcSalary($register_info['shift_type']);
 
-$calcResult = $calcSalary->calcSalary($partTimer, $partSalary);
+$calcResult = CalcSalary::calcSalary($partTimer, $register_info['shift_type']);
 $result = [$register_info['date'], $calcResult];
 
 var_export($result);
