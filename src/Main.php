@@ -3,6 +3,7 @@
 require_once('PartTimer.php');
 require_once('PartSalary.php');
 require_once('Calculator.php');
+require_once('Database.php');
 
 $register_info = [];
 
@@ -17,9 +18,20 @@ echo "shiftTypeを['morning', 'afternoon', 'night']から入力してくださ�
 echo 'shiftType: ';
 $register_info['shift_type'] = trim(fgets(STDIN));
 
-$partTimer = new PartTimer(1, 'John', 'john.doe@example.com', 3);
+$part_timer = new PartTimer(1, 'John', 'john.doe@example.com', 3);
 
-$calcResult = Calculator::calcSalary($partTimer, $register_info['shift_type']);
-$result = [$register_info['date'], $calcResult];
+$calc_result = Calculator::calcSalary($part_timer, $register_info['shift_type']);
 
-var_export($result);
+$salary_info = [
+    'part_timer_id' => $part_timer->getId(),
+    'part_timer_name' => $part_timer->getName(),
+    'part_timer_email' => $part_timer->getEmail(),
+    'part_timer_level' => $part_timer->getLevel(),
+    'shift_type' => $register_info['shift_type'],
+    'date_worked' => $register_info['date'],
+    'generated_salary' => $calc_result,
+];
+
+Database::init();
+Database::dbConnect();
+Database::dbClose();
