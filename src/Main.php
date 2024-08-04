@@ -4,6 +4,7 @@ require_once('PartTimer.php');
 require_once('PartSalary.php');
 require_once('Calculator.php');
 require_once('Database.php');
+require_once('SalaryRecordsTable.php');
 
 $register_info = [];
 
@@ -35,6 +36,6 @@ $salary_info = [
 Database::init();
 $link = Database::dbConnect();
 
-// データベースへデータを送信
+SalaryRecordsTable::insert($link, $salary_info);
 
 Database::dbClose();
