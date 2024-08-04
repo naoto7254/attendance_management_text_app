@@ -33,5 +33,8 @@ $salary_info = [
 ];
 
 Database::init();
-Database::dbConnect();
+$link = Database::dbConnect();
+
+// データベースへデータを送信
+
 Database::dbClose();

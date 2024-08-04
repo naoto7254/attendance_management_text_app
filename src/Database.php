@@ -23,7 +23,7 @@ class Database
         self::$dbDatabase = $_ENV['DB_DATABASE'];
     }
 
-    public static function dbConnect(): void
+    public static function dbConnect(): ?mysqli
     {
         try {
             self::$link = mysqli_connect(self::$dbHost, self::$dbUsername, self::$dbPassword, self::$dbDatabase);
@@ -33,8 +33,10 @@ class Database
             }
 
             echo 'Connected successfully.' . PHP_EOL;
+            return self::$link;
         } catch (mysqli_sql_exception $e) {
             echo 'Connection failed: ' . $e->getMessage() . PHP_EOL;
+            return null;
         }
     }
 
