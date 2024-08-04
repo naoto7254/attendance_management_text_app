@@ -25,6 +25,8 @@ class Database
 
     public static function dbConnect(): ?mysqli
     {
+        // <ToDo> バリデーションをする
+        // うまくthrowされていない。この辺の仕組みについてちゃんと調べて実装し直す
         try {
             self::$link = mysqli_connect(self::$dbHost, self::$dbUsername, self::$dbPassword, self::$dbDatabase);
 
