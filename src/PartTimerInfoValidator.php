@@ -28,7 +28,4 @@ class PartTimerInfoValidator
         }
         return true;
     }
-    // シフトタイプのバリデーション
-    // 働いた日のバリデーション
-    // 給料のバリデーション
 }
