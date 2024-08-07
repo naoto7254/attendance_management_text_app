@@ -1,11 +1,14 @@
 <?php
 
+// このファイルごちゃごちゃすぎ。後で見やすいようにまとめる
+
 require_once('PartTimer.php');
 require_once('PartSalary.php');
 require_once('Calculator.php');
 require_once('Database.php');
 require_once('SalaryRecordsTable.php');
 require_once('PartTimerInfoValidator.php');
+require_once('ShiftTypeValidator.php');
 
 $salary_info = [];
 
@@ -28,18 +31,20 @@ $salary_info['part_timer_name'] = $part_timer->getName();
 $salary_info['part_timer_email'] = $part_timer->getEmail();
 $salary_info['part_timer_level'] = $part_timer->getLevel();
 
-// PartTimerクラスのバリデーションs
+// バリデーション
 $part_timer_validator = new PartTimerInfoValidator($part_timer);
 
 $error_detection = [];
+
 $error_detection[] = $part_timer_validator->validateLevel();
+$error_detection[] = ShiftTypeValidator::ShiftValidate($salary_info['shift_type']);
 
 if (in_array(false, $error_detection)) {
     exit;
 }
 
 
-// 給料の計算
+// 給料の計算 - これ静的メソッドで本当に書いた方が良いのかちゃんと検討する
 $calc_result = Calculator::calcSalary($part_timer, $salary_info['shift_type']);
 
 $salary_info['generated_salary'] = $calc_result;
